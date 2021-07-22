@@ -1,5 +1,6 @@
 #ifndef FILA_H
 #define FILA_H
+#include <iostream>
 #include "Celula.hpp"
 
 template <typename T>
@@ -11,6 +12,7 @@ public:
 	void Enfileirar(T item);
 	void Desenenfileirar();
 	void Limpar();
+	void Imprimir();
 private:
 	int tamanho;
 	Celula<T> *frente;
@@ -52,12 +54,13 @@ template <typename T>
 void Fila<T>::Desenenfileirar() {
 	if (IsVazia())
 	{
-		throw "Fila está vazia!";
+		throw "Fila vazia!";
 	}
 	else if (frente == tras)
 	{
 		delete frente;
-		frente = tras = nullptr;
+		frente = nullptr;
+		tras = nullptr;
 		tamanho--;
 	}
 	else
@@ -86,5 +89,22 @@ void Fila<T>::Limpar() {
 		Desenenfileirar();
 }
 
+template <typename T>
+void Fila<T>::Imprimir(){
+	if(IsVazia())
+	{
+		std::cout << "Fila vazia" << std::endl;
+	}else
+	{
+		Celula<T> * itemAtual = frente;
+
+		while(itemAtual != NULL)
+		{
+			std::cout << itemAtual->dado << ' ';
+			itemAtual = itemAtual->prox; 
+		}
+		std::cout << std::endl;
+	}
+}
 
 #endif
