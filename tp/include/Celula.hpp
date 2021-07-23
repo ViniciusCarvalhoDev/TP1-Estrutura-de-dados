@@ -6,8 +6,11 @@ template <typename T>
 class Celula {
 
 	public:
+		//Construtor da Celula
 		Celula();
+		//Destrutor da Celula
 		Celula(T);
+		//Retorna o conteúdo da Celula
 		T recuperaDado();
 		T dado;
 		Celula<T> *prox;

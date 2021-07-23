@@ -1,35 +1,50 @@
 #include <iostream>
 #include <string>
+#include <cstdio>
+#include <cstdlib>
 #include "Fila.hpp"
 
-int main()
+int main(int argc, char *argv[])
 {   
-    Fila<std::string> minhaFila;
+    std::string linha;
+    std::string input;
+    std::string temporaria;
 
-    std::string oi0 = "a";
-    std::string oi1 = "b";
-    std::string oi2 = "c";
-    std::string oi3 = "d";
-    std::string oi4 = "e";
-    std::string oi5 = "s";
+    int numeroDoServidor;
+    int quantidadeDeServidores;
+    int aux = 0;
 
-    minhaFila.Enfileirar(oi0);
-    minhaFila.Enfileirar(oi1);
-    minhaFila.Enfileirar(oi2);
-    minhaFila.Enfileirar(oi3);
-    minhaFila.Enfileirar(oi4);
+    Fila<std::string> historico;
+    
+    FILE* arquivo = fopen(argv[1],"rt");
 
-    std::cout << "Whas up motherfuckers!\n" << std::endl;
-    minhaFila.Imprimir();
-    minhaFila.Tamanho();
+    char buf[100];
+    while (std::fgets(buf, sizeof buf, arquivo) != nullptr) {
 
-    std::cout << minhaFila.Recupera(3) << std::endl;
-    minhaFila.Imprimir();
-    minhaFila.FurarFila(oi5);
-    minhaFila.Imprimir();
-    minhaFila.Remover(1);
-    minhaFila.Imprimir();
-    minhaFila.~Fila();
+        if(aux == 0){
+            std::cout << buf << '\n';
+        }else{
+             temporaria = buf;
+            input = temporaria.substr(0,4);
+
+            if(input == "INFO"){
+                std::cout << "info" << '\n';
+            }else if(input == "WARN"){
+                std::cout << "warn" << '\n';
+            }else if(input == "TRAN"){
+                std::cout << "tran" << '\n';
+            }else if(input == "ERRO"){
+                std::cout << "erro" << '\n';
+            }else if(input == "SEND"){
+                std::cout << "send" << '\n';
+            }else{
+                std::cout << "flush" << '\n';
+            }
+        }
+        
+        aux++;
+    }
+
     return 0;
 
 }

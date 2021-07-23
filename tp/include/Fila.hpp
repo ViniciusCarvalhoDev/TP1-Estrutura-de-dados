@@ -6,22 +6,33 @@
 template <typename T>
 class Fila
 {
-public:
-	Fila();
-	~Fila();
-	void Enfileirar(T item);
-	void Desenenfileirar();
-	void FurarFila(T item);
-	void Limpar();
-	void Imprimir();
-	void Tamanho();
-	void Remover(int pos);
-	T Recupera(int i); //recupera item na posição i
-private:
-	int tamanho;
-	Celula<T> *frente;
-	Celula<T> *tras;
-	bool IsVazia();
+	public:
+		//Construtor da Fila
+		Fila();
+		//Destrutor da Fila
+		~Fila();
+		//Adiciona um item no final da Fila
+		void Enfileirar(T item);
+		//Remove o primeiro item da Fila 
+		void Desenenfileirar();
+		//Insere um item no inicio da Fila
+		void FurarFila(T item);
+		//Esvazia a Fila
+		void Limpar();
+		//Imprime o conteúdo da Fila
+		void Imprimir();
+		//Retorna o tamanho da Fila
+		void Tamanho();
+		//Remove o item na posição especificada 
+		void Remover(int pos);
+		//Recupera item na posição especificada
+		T Recupera(int i); 
+	private:
+		int tamanho;
+		Celula<T> *frente;
+		Celula<T> *tras;
+		//Retorna verdadeiro caso a Fila esteja vazia
+		bool IsVazia();
 };
 
 template <typename T>
