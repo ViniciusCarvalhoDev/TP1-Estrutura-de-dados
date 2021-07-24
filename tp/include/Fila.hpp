@@ -27,8 +27,6 @@ class Fila
 		void Remover(int pos);
 		//Recupera item na posição especificada
 		T Recupera(int i); 
-		//Copia todo o conteudo de uma fila para outra 
-		void CopiaConteudo(T *Fila);
 	private:
 		int tamanho;
 		Celula<T> *frente;
@@ -122,7 +120,6 @@ void Fila<T>::Imprimir(){
 			std::cout << itemAtual->dado << std::endl;
 			itemAtual = itemAtual->prox; 
 		}
-		std::cout << std::endl;
 	}
 }
 
@@ -151,18 +148,6 @@ T Fila<T>::Recupera(int i){
 			aux++;
 		}
 		return itemAtual->dado;
-}
-
-template<typename T>
-void Fila<T>::CopiaConteudo(T *Fila){
-	
-	Celula<T> * itemAtual = frente;
-
-		while(itemAtual != NULL)
-		{
-			Fila->Enfileirar(itemAtual->dado);
-			itemAtual = itemAtual->prox; 
-		}
 }
 
 template<typename T>

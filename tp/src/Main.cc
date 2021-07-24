@@ -80,8 +80,11 @@ int main(int argc, char *argv[])
             } if(input == "SEND"){
                 for (int i = 0; i < quantidadeDeServidores; i++)
                 {
-                    historico.Enfileirar(servidores[i].Recupera(0));
-                    servidores[i].Desenenfileirar();
+                    if (servidores[i].Recupera(0) != "")
+                    {
+                        historico.Enfileirar(servidores[i].Recupera(0));
+                        servidores[i].Desenenfileirar();
+                    }
                 }
 
             }if(input == "FLUS"){
@@ -97,8 +100,6 @@ int main(int argc, char *argv[])
 
         aux++;
     }
-
     fclose (arquivo);
     return 0;
-
 }
