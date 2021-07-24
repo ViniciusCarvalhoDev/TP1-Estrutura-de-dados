@@ -66,7 +66,7 @@ int main(int argc, char *argv[])
                     servidores[numeroDoServidor2].Enfileirar(servidores[numeroDoServidor].Recupera(i));
                 }
 
-                servidores[numeroDoServidor2].Limpar();
+                servidores[numeroDoServidor].Limpar();
 
             } if(input == "ERRO"){
                 numeroDoServidor = std::stoi(temporaria.substr(4,4));
@@ -92,7 +92,6 @@ int main(int argc, char *argv[])
                 {
                     servidores[i].Imprimir();
                 }
-                
             }
         }
 

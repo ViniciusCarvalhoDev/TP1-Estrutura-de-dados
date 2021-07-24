@@ -105,23 +105,6 @@ void Fila<T>::Limpar() {
 	while (!IsVazia() != 0)
 		Desenenfileirar();
 	
-	/*
-	while (frente != nullptr)
-	{
-		Celula<T> * prox = frente->prox;
-		delete frente;
-		frente = prox;
-	}
-	*/
-
-	/*Celula<T> *temp1 = frente->prox;
-	while(temp1!=NULL) // as I am considering tail->next = NULL
-	{   
-		frente->prox = temp1->prox;
-		temp1->prox = NULL;
-		free(temp1);
-		temp1 = frente->prox;
-	}*/
 	tamanho = 0;
 }
 
@@ -129,7 +112,6 @@ template <typename T>
 void Fila<T>::Imprimir(){
 	if(IsVazia())
 	{
-		//std::cout << "Fila vazia" << std::endl;
 		return;
 	}else
 	{
