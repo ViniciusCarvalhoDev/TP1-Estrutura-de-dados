@@ -22,11 +22,13 @@ class Fila
 		//Imprime o conteúdo da Fila
 		void Imprimir();
 		//Retorna o tamanho da Fila
-		void Tamanho();
+		int Tamanho();
 		//Remove o item na posição especificada 
 		void Remover(int pos);
 		//Recupera item na posição especificada
 		T Recupera(int i); 
+		//Copia todo o conteudo de uma fila para outra 
+		void CopiaConteudo(T *Fila);
 	private:
 		int tamanho;
 		Celula<T> *frente;
@@ -69,7 +71,7 @@ template <typename T>
 void Fila<T>::Desenenfileirar() {
 	if (IsVazia())
 	{
-		throw "Fila vazia!";
+		return;
 	}
 	else if (frente == tras)
 	{
@@ -99,22 +101,43 @@ bool Fila<T>::IsVazia() {
 }
 template <typename T>
 void Fila<T>::Limpar() {
+
 	while (!IsVazia() != 0)
 		Desenenfileirar();
+	
+	/*
+	while (frente != nullptr)
+	{
+		Celula<T> * prox = frente->prox;
+		delete frente;
+		frente = prox;
+	}
+	*/
+
+	/*Celula<T> *temp1 = frente->prox;
+	while(temp1!=NULL) // as I am considering tail->next = NULL
+	{   
+		frente->prox = temp1->prox;
+		temp1->prox = NULL;
+		free(temp1);
+		temp1 = frente->prox;
+	}*/
+	tamanho = 0;
 }
 
 template <typename T>
 void Fila<T>::Imprimir(){
 	if(IsVazia())
 	{
-		std::cout << "Fila vazia" << std::endl;
+		//std::cout << "Fila vazia" << std::endl;
+		return;
 	}else
 	{
 		Celula<T> * itemAtual = frente;
 
 		while(itemAtual != NULL)
 		{
-			std::cout << itemAtual->dado << ' ';
+			std::cout << itemAtual->dado << std::endl;
 			itemAtual = itemAtual->prox; 
 		}
 		std::cout << std::endl;
@@ -122,12 +145,21 @@ void Fila<T>::Imprimir(){
 }
 
 template<typename T>
-void Fila<T>::Tamanho(){
-	std::cout << tamanho << ' ' << std::endl;
+int Fila<T>::Tamanho(){
+	return tamanho;
 }
 
 template<typename T>
 T Fila<T>::Recupera(int i){
+
+	if (i > tamanho)
+	{
+		return "";
+	}
+	else if(IsVazia())
+	{
+		return "";
+	}
 	int aux = 0;
 	Celula<T> * itemAtual = frente;
 
@@ -137,6 +169,18 @@ T Fila<T>::Recupera(int i){
 			aux++;
 		}
 		return itemAtual->dado;
+}
+
+template<typename T>
+void Fila<T>::CopiaConteudo(T *Fila){
+	
+	Celula<T> * itemAtual = frente;
+
+		while(itemAtual != NULL)
+		{
+			Fila->Enfileirar(itemAtual->dado);
+			itemAtual = itemAtual->prox; 
+		}
 }
 
 template<typename T>
@@ -166,7 +210,7 @@ void Fila<T>::Remover(int pos){
 
 	if (IsVazia())
 	{
-		throw "Fila vazia!";
+		return;
 	}
 	if(pos == 0)
 	{
@@ -183,7 +227,7 @@ void Fila<T>::Remover(int pos){
 
 		if(temporaria == NULL || temporaria == nullptr || temporaria->prox == NULL || temporaria->prox == nullptr)
 		{
-			throw "Essa posição não pode ser alcançada";
+			return;
 		}
 
 		Celula<T>* proxima = temporaria->prox->prox;
